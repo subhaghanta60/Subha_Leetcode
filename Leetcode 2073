@@ -1,0 +1,34 @@
+My soluation
+
+class Solution {
+public:
+    int timeRequiredToBuy(vector<int>& tickets, int k) {
+        int n = tickets.size();
+        int sum= 0;
+        for(int i=0;i<=k;i++){
+            sum +=min(tickets[i],tickets[k]);
+            
+        }
+        for(int i=k+1;i<n;i++){
+            sum += min(tickets[i],tickets[k]-1);
+        
+    }
+        return sum;
+    }
+};
+
+class Solution {
+public:
+    int timeRequiredToBuy(vector<int>& tickets, int k) {
+        int tm=0;
+        int n=tickets.size();
+        for(int i=0;i<n;i++){
+            if(i<=k) tm +=min(tickets[i],tickets[k]);
+            else {
+                tm +=min(tickets[i],tickets[k]-1);
+            }
+        }
+        return tm;
+        
+    }
+};
