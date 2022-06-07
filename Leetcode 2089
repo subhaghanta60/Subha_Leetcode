@@ -1,0 +1,62 @@
+class Solution {
+public:
+    vector<int> targetIndices(vector<int>& nums, int target) {
+        sort(nums.begin(),nums.end());
+        vector<int>ans;
+        
+        for(int i=0;i<nums.size();i++){
+            if(nums[i] == target)                                TC -> N(LOGN) + O(N) 
+            ans.push_back(i);
+        }
+        return ans;
+        
+        
+    }
+};
+
+******************optimal ******************
+
+class Solution {
+public:
+    vector<int> targetIndices(vector<int>& nums, int target) {
+        int CountLess =0;
+        int CountTarget =0;
+        for(auto &it :nums){
+            CountTarget += (it==target);
+            CountLess   += (it<target);
+        }
+        
+        vector<int>ans;
+        while(CountTarget--){
+            ans.push_back(CountLess++);
+        }
+        return ans;
+   
+        
+        
+    }
+};
+
+
+
+
+**************************************
+
+class Solution {
+public:
+    vector<int> targetIndices(vector<int>& nums, int target) {
+        int CountLess =0;
+        int CountEqual =0;
+        for(int i=0;i<nums.size();i++){
+            if(nums[i] == target) CountEqual++;
+            if(nums[i]<target) CountLess ++;
+        }
+         vector<int> ans;
+        while(CountEqual--){
+            ans.push_back(CountLess++);
+        }
+        return ans;
+        
+        
+    }
+};
