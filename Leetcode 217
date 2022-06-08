@@ -1,0 +1,72 @@
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        unordered_map<int,int>mpp;
+        
+        for(int i=0;i<nums.size();i++){
+            
+            if(mpp[nums[i]] == 1) return true;
+            
+            else mpp[nums[i]]++;
+        }
+        return false;
+        
+        
+        
+    }
+};
+
+
+**************************************
+ class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        set<int>st;
+        
+        for(int i=0;i<nums.size();i++){
+            st.insert(nums[i]);
+        }
+        if(st.size() == nums.size()) return false;
+        return true;
+        
+    }
+};
+
+
+********************************
+
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        unordered_map<int,int>mpp;
+        
+        for(auto &it :nums){
+            mpp[it]++;
+        }
+        for(auto &it :mpp){
+            if(it.second > 1) return true;
+        }
+        return false;
+        
+        
+    }
+};
+
+**********************************
+
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        unordered_map<int,int>mpp;
+        
+        for(auto &it :nums){
+            
+            if(mpp[it] == 1) return true;
+            
+            else mpp[it]++;
+        }
+        return false;
+        
+        
+    }
+};
