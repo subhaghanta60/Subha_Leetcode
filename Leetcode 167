@@ -1,0 +1,33 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& numbers, int target) {
+        
+        int low =0;
+        int high = numbers.size()-1;
+        
+        
+        while(low<high){
+            int sum = numbers[low] + numbers[high];
+            
+            if(sum == target) {
+                
+             vector<int>ans{low+1,high+1};
+                return ans;
+            }
+                
+            if(sum <target) {
+                low++;
+                continue;
+            }
+            if(sum>target)  {
+                high--;
+                continue;
+            }
+            
+        }
+        
+        return numbers;
+        
+        
+    }
+};
