@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int numJewelsInStones(string jewels, string stones) {
+        int ans=0;
+        
+        for(auto it1 : jewels ){
+            for(auto it2 : stones){
+                if(it1 == it2){
+                    ans++;
+                }
+            }
+        }
+        return ans;
+        
+    }
+};
