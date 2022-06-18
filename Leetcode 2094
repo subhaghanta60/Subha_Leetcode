@@ -1,0 +1,70 @@
+class Solution {
+private: 
+    bool check(int num, int freq1[]){
+        int freq2[10] ={0};
+        while(num){
+            freq2[num % 10] +=1;
+            num /=10;
+            
+        }
+        for(int i=0;i<=9;i++){
+            if(freq2[i] && freq2[i] > freq1[i]) return false;
+        }
+        return true;
+        
+    }
+    
+    
+
+    
+public:
+    vector<int> findEvenNumbers(vector<int>& digits) {
+        vector<int>ans;
+        int freq1[10] ={0};
+        for(auto it : digits){
+            freq1[it]++;
+            
+        }
+        // even number
+        
+        for(int i=100 ;i<=998;i +=2){
+            if(check(i, freq1)){
+                ans.push_back(i);
+            }
+        }
+        
+        
+        return ans;
+    
+        
+    }
+};
+
+***********************************************************************************
+class Solution {
+public:
+    vector<int> findEvenNumbers(vector<int>& digits) {
+        int freq[10] ={0};
+        
+        for(auto &it :digits){
+            freq[it]++;
+        }
+        
+        vector<int> ans;
+        for(int i=1;i<=9;i++){
+            for(int j = 0;j <= 9 && freq[i];j++){
+                for(int k=0;k<=8 && freq[j] > (i==j); k+=2){
+                    if(freq[k] > ((i == k) + (j==k))){
+                        ans.push_back(i*100 + j*10 + k);
+                    }
+                }
+                
+            }
+        }
+        return ans;
+        
+        
+    }
+};
+
+
