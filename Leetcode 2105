@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int minimumRefill(vector<int>& plants, int capacityA, int capacityB) {
+        int l=0;
+        int n=plants.size();
+        int r=n-1;
+        int aliceCap =capacityA;
+        int bobCap = capacityB;
+        int time =0;
+        while(l<r){
+            if(plants[l] > aliceCap) {
+                time +=1;
+                aliceCap = capacityA;
+            }
+            
+            if(plants[r] > bobCap){
+                time +=1;
+                bobCap = capacityB;
+                
+            }
+            aliceCap -= plants[l++] ; 
+                
+            bobCap    -= plants[r--] ;
+                
+            
+        }
+        if(l == r){
+            if(max(aliceCap, bobCap) < plants[l]) time +=1;
+        }
+        return time;
+        
+    }
+};
