@@ -1,0 +1,49 @@
+class Solution {
+public:
+    int mostWordsFound(vector<string>& sentences) {
+        int ans=0;
+        
+        for(auto &it:sentences){
+            int cnt=1;
+            for(int i=0;i<it.size();i++){
+                if(it[i] == ' ') cnt++;
+            }
+            ans=max(ans, cnt);
+        }
+        return ans;
+        
+    }
+};
+
+
+*************************************
+class Solution {
+public:
+    int mostWordsFound(vector<string>& sentences) {
+        int maximum =0;
+        for(auto &it : sentences){
+            int cnt =0;
+            for(auto &ch :it){
+                if(ch ==' ') cnt++;
+            }
+            maximum = max(maximum, cnt+1);
+        }
+        return maximum;
+        
+    }
+};
+
+***********************C++ STL SOLUATION***************************
+
+class Solution {
+public:
+    int mostWordsFound(vector<string>& sentences) {
+        int maximum =0;
+        for(auto &it : sentences){
+            int cnt= count(it.begin(), it.end(), ' ') +1;
+            maximum =max(maximum, cnt);
+        }
+        return maximum;
+        
+    }
+};
