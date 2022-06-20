@@ -1,0 +1,51 @@
+class Solution {
+public:
+    vector<string> findAllRecipes(vector<string>& recipes, vector<vector<string>>& ingredients, vector<string>& supplies) {
+        unordered_set<string>st;
+        for(auto it :supplies) st.insert(it);
+        
+        queue<int>q;
+        int n = recipes.size();
+        
+        for(int i=0;i<n;i++){
+            q.push(i);
+        }
+        bool mark[n];
+        memset(mark, false, sizeof mark);
+        bool keepiterating = true;
+        while(keepiterating){
+            keepiterating =false;
+            queue<int>dupq;
+            while(!q.empty()){
+                bool fl =true;
+                int i=q.front();
+                q.pop();
+                int m = ingredients[i].size();
+                for(int j=0;j<m;j++){
+                    if(st.find(ingredients[i][j]) == st.end()){
+                        fl=false;
+                        break;
+                    }
+                }
+                if(fl == true){
+                    st.insert(recipes[i]);
+                    keepiterating =true;
+                    mark[i] =true;
+                }
+                else {
+                    dupq.push(i);
+                }
+                   
+            }
+            q=dupq;
+        }
+            
+        
+        vector<string>ans;
+            for(int i=0;i<n;i++){
+                if(mark[i] == true) ans.push_back(recipes[i]);
+            }
+            return ans;
+        
+    }
+};
