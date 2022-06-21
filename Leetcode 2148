@@ -1,0 +1,47 @@
+class Solution {
+public:
+    int countElements(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        int min =nums[0];
+        int max=nums[nums.size()-1];
+        int cnt =0;
+        
+        for(auto &it :nums){
+            if(it>min && it<max){
+                cnt++;
+            }
+        }
+        return cnt;
+        
+    }
+};
+
+****************************************************
+
+class Solution {
+public:
+    int countElements(vector<int>& nums) {
+        int min =nums[0];
+        int cntmin =1;
+        int max =nums[0];
+        int cntmax =1;
+        int ans=0;
+        for(int i=1;i<nums.size();i++){
+            if(nums[i] < min){
+                min = nums[i];
+                cntmin=1;
+            }
+            else if (nums[i] == min) cntmin++;
+            if(nums[i] > max){
+                max =nums[i];
+                cntmax =1;
+            }
+            else if( nums[i] == max) cntmax++;
+        }
+        if(max == min) return 0;
+        ans = nums.size() - (cntmax+cntmin);
+        
+        return ans;
+        
+    }
+};
