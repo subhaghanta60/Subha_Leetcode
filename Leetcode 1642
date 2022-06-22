@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int furthestBuilding(vector<int>& heights, int bricks, int ladders) {
+        priority_queue<int>MaxB;
+        
+        int n=heights.size();
+        int i;
+        for(i=0;i<n-1;i++){
+            if(heights[i] >= heights[i+1])
+                continue;
+            
+            int diff=heights[i+1]-heights[i];
+            
+            if(bricks>=0){
+                bricks -=diff;
+                MaxB.push(diff);
+                }
+            if(bricks<0){
+                bricks += MaxB.top();
+                MaxB.pop();
+                ladders--;
+            }
+            if(ladders<0) break;
+        }
+    return i;
+        
+    }
+};
