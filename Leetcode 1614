@@ -1,0 +1,14 @@
+class Solution {
+public:
+    int maxDepth(string s) {
+        
+        int ans=0;
+        int k=0;
+        for(auto it: s){
+            if(it=='(') k++;
+            else if(it == ')') k--;
+                ans=max(ans, k);
+         }
+    return ans;
+    }
+};
