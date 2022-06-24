@@ -1,0 +1,26 @@
+class Solution {
+public:
+    vector<int> maxScoreIndices(vector<int>& nums) {
+        int Rightone=0;
+        for(auto it:nums) Rightone += it;
+        int mx=Rightone;
+        int Leftzero=0;
+        vector<int>ans;
+        for(int i=0;i<=nums.size();i++){
+            if(Leftzero + Rightone > mx){
+                mx=Leftzero + Rightone;
+                ans.clear();
+                
+            }
+            if(Leftzero + Rightone == mx){
+                ans.push_back(i);
+            }
+            if(i<nums.size()){
+                Rightone -=nums[i];
+                Leftzero +=(nums[i]==0);
+            }
+        }
+        return ans;
+        
+    }
+};
