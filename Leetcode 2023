@@ -1,0 +1,46 @@
+class Solution {
+public:
+    int numOfPairs(vector<string>& nums, string target) {
+        int n=nums.size();
+        int ans=0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                string x= nums[i] + nums[j];
+                if(i != j && x ==target){
+                    ans++;
+                }
+            }
+        }
+        return ans;
+        
+    }
+};
+
+********************************************************
+
+  //////////////////////   O(n2) approach
+class Solution {
+public:
+    int numOfPairs(vector<string>& nums, string target) {
+        int n=nums.size();
+        vector<int>prefix(target.size()+1, 0);
+        vector<int>suffix(target.size()+1, 0);
+        int cnt =0;
+        for(int i=0;i<n;i++){
+            if(nums[i].size() >= target.size()) continue;
+            int prefixInd = target.compare(0, nums[i].size(), nums[i]) == 0;
+            int suffixInd = target.compare(target.size()- nums[i].size(), nums[i].size(), nums[i]) ==0;
+            if(prefixInd == true){
+                cnt += suffix[nums[i].size()];
+            }
+            if(suffixInd == true){
+                cnt += prefix[target.size() -nums[i].size() - 1];
+            }
+            
+            if(prefixInd == true) prefix[nums[i].size() -1]++;
+            if(suffixInd == true) suffix[target.size()- nums[i].size()]++;
+        }
+        return cnt;
+        
+    }
+};
