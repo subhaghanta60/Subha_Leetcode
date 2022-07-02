@@ -1,0 +1,27 @@
+class Solution {
+private:
+    void backtrack(int index, string &digits, string &path,vector<string> &ans){
+        string keypaid[10] ={" "," " ,"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+         
+        if(index == digits.size()){
+            ans.push_back(path);
+            return ;
+        }
+        for(char c:keypaid[digits[index] - '0']){
+            path[index] =c;
+            backtrack(index+1,digits, path,ans);
+        }
+      
+    }
+
+public:
+    vector<string> letterCombinations(string digits) {
+        if(digits.size() == 0) return {};
+        string path =digits;
+        vector<string> ans;
+        
+        backtrack(0,digits, path,ans);
+        return ans;
+        
+    }
+};
