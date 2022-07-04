@@ -19,3 +19,59 @@ public:
         return ans;
     }
 };
+
+
+
+******************************Recursive Solution**********************
+class Solution {
+private:
+    int func(int ind, int jobs, vector<vector<int>> &events){
+        if(ind == events.size() || jobs == 2){
+            return 0;
+        }
+        
+        vector<int> vec = {events[ind][1], INT_MAX, INT_MAX};
+        int nextInd = upper_bound(events.begin(), events.end(), vec)- events.begin();
+        
+        int val1 = events[ind][2] + func(nextInd, jobs+1, events);
+        
+        int val2 = func(ind+1, jobs, events);
+        
+        return max(val1, val2);
+    }
+public:
+    int maxTwoEvents(vector<vector<int>>& events) {
+        sort(events.begin(), events.end());
+        return func(0,0,events);
+        
+    }
+};
+
+**************************************DP***********************
+
+class Solution {
+private:
+    int func(int ind, int jobs, vector<vector<int>> &events, vector<vector<int>>&dp){
+        if(ind == events.size() || jobs == 2){
+            return 0;
+        }
+        if(dp[ind][jobs] !=-1) return dp[ind][jobs];
+        
+        vector<int> vec = {events[ind][1], INT_MAX, INT_MAX};
+        int nextInd = upper_bound(events.begin(), events.end(), vec)- events.begin();
+        
+        int val1 = events[ind][2] + func(nextInd, jobs+1, events,dp);
+        
+        int val2 = func(ind+1, jobs, events,dp);
+        
+        return dp[ind][jobs]= max(val1, val2);
+    }
+public:
+    int maxTwoEvents(vector<vector<int>>& events) {
+        sort(events.begin(), events.end());
+        int n=events.size();
+        vector<vector<int>> dp(n, vector<int>(2, -1));
+        return func(0,0,events,dp);
+        
+    }
+};
