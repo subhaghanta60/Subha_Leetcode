@@ -1,0 +1,67 @@
+class DSU {
+    private: vector<int>parent, size;
+    
+   public: DSU(int n){
+        for(int i=0;i<=n;i++){
+            parent.push_back(i);
+            size.push_back(1);
+        }
+    }
+    public:  int findPar(int node){
+        if(parent[node] == node) return node;
+        return  parent[node] = findPar(parent[node]);
+    }
+    
+    public: void unionSize(int u, int v) {
+        int pu =findPar(u);
+        int pv = findPar(v);
+        
+        if(pu == pv) return;
+        
+        if(size[pu] <size[pv]){
+            parent[pu] =pv;
+            size[pv] +=size[pu];
+        }
+        else {
+            parent[pv] = pu;
+            size[pu] +=size[pv];
+        } 
+    }
+    
+};
+
+
+
+class Solution {
+public:
+    vector<bool> friendRequests(int n, vector<vector<int>>& restrictions, vector<vector<int>>& requests) {
+        DSU dsu(n);
+        vector<bool>ans;
+        
+        for(auto &it: requests){
+            int pu= dsu.findPar(it[0]);
+            int pv =dsu.findPar(it[1]);
+            bool fl=true;
+            if(pu !=pv){
+                for(auto &it2: restrictions){
+                    int pu2=dsu.findPar(it2[0]);
+                    int pv2=dsu.findPar(it2[1]);
+                    
+                    if((pu2 == pu && pv2 == pv) || (pu2 == pv && pv2 == pu)){
+                        fl =false;
+                        break;
+                        
+                    }
+                   
+                }
+                if(fl) {
+                     dsu.unionSize(it[0],it[1]);
+                }
+            }
+         ans.push_back(fl);
+        }
+        
+        return ans;
+        
+    }
+};
