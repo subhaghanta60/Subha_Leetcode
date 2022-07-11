@@ -1,0 +1,30 @@
+vector<int> reaching_height(int n, int a[]) {
+     if(n==1) {
+         return {a[0]};
+     }
+     priority_queue<int>max_pq;
+     priority_queue<int,vector<int>,greater<int>>min_pq;
+     vector<int>ans(n);
+     
+     for(int i=0;i<n;i++){
+         max_pq.push(a[i]);
+         min_pq.push(a[i]);
+    }
+    
+    int check=0;
+    for(int i=0;i<n;i+=2){
+        ans[i]=max_pq.top();
+        check +=ans[i];
+        max_pq.pop();
+    }
+    for(int i=1;i<n;i+=2){
+        ans[i]=min_pq.top();
+        check -=ans[i];
+        min_pq.pop();
+    }
+    if(check <=0){
+        return {-1};
+    }
+    return ans;
+     
+}
