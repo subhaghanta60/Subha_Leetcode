@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int longestPalindrome(string s) {
+        int freq[52] ={0};
+        int ans =0;
+        bool is_odd=false;
+        for(int i =0;i<s.size();i++){
+            if(s[i] <='Z'){
+                freq[s[i]-'A']++;
+            }
+            else {
+                freq[s[i]-'a'+26]++;
+            }
+            
+            
+        }
+        
+        for(int i=0;i<52;i++){
+            ans += (freq[i]/2);
+            if(freq[i] %2 == 1 ){
+                is_odd =true;
+            }
+        }
+        return is_odd== true ? 2*ans +1: 2*ans ;
+    }
+};
