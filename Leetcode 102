@@ -1,0 +1,19 @@
+class Solution {
+private: 
+void BuildVector(TreeNode  *root, int depth, vector<vector<int>>&res){
+    if(root == NULL) return ;
+    if(res.size() == depth){
+        res.resize(depth+1);
+    }
+    res[depth].push_back(root->val);
+    BuildVector(root->left, depth+1,res);
+    BuildVector(root->right, depth+1, res);
+}
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        vector<vector<int>>res;
+        BuildVector(root,0,res);
+        return res;
+        
+    }
+};
