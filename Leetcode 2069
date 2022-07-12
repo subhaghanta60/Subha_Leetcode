@@ -1,0 +1,53 @@
+
+
+class Robot {
+private:
+    int moves=0;
+    map<int,pair<pair<int,int>, string>>mpp;
+    int Perlen=0;
+    bool move =false;
+    
+public:
+    Robot(int width, int height) {
+        mpp[Perlen] ={{0,0}, "South"};
+        for(int i=1;i<width;i++){
+            mpp[++Perlen] = {{i,0},"East"};
+        }
+        for(int i=1;i<height;i++){
+            mpp[++Perlen] ={{width-1,i},"North"};
+        }
+        for(int i=width-2;i>=0;i--){
+             mpp[++Perlen] = {{i,height-1},"West"};
+            }
+        for(int i=height-2;i>=0;i--){
+            mpp[++Perlen] ={{0,i},"South"};
+        }
+        
+    }
+    
+    void step(int num) {
+        move =true;
+        moves +=num;
+        moves %= Perlen;
+    }
+    
+    vector<int> getPos() {
+        vector<int>pos(2);
+        pos[0]=mpp[moves].first.first;
+        pos[1] =mpp[moves].first.second;
+        return pos;
+    }
+    
+    string getDir() {
+        if(!move) return "East";
+        return  mpp[moves].second;
+    }
+};
+
+/**
+ * Your Robot object will be instantiated and called as such:
+ * Robot* obj = new Robot(width, height);
+ * obj->step(num);
+ * vector<int> param_2 = obj->getPos();
+ * string param_3 = obj->getDir();
+ */
