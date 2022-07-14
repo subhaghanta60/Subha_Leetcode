@@ -1,0 +1,22 @@
+class Solution {
+private: 
+    void dfs(vector<vector<int>>&image, int i, int j, int val, int Newcolor){
+        if(i<0 || i>image.size()-1|| j<0 || j>image[0].size()-1|| image[i][j]== Newcolor || image[i][j] !=val ){
+            return;
+        }
+        image[i][j] =Newcolor;
+        int dx[]={-1,0,1,0};
+        int dy[]={0,1,0,-1};
+        for(int k=0;k<4;k++){
+            dfs(image,i+dx[k],j+dy[k],val, Newcolor);
+            
+        }
+    }
+public:
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+        
+        int val=image[sr][sc];
+        dfs(image,sr,sc,val,color);
+        return image;
+    }
+};
