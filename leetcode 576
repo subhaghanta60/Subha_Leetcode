@@ -1,0 +1,38 @@
+class Solution {
+public:
+
+public:
+        int dp[51][51][51];
+        int dfs(int m, int n, int maxMove, int i, int j){
+            
+        
+        
+        
+        if(i<0 || i>=m || j <0 || j>=n  ){
+           
+            return 1;
+        }
+        if(dp[i][j][maxMove] !=-1) return dp[i][j][maxMove];
+            
+        int mod =pow(10,9)+7;
+        int ans=0;
+        
+        if(maxMove<=0) return 0;
+        int dx[]={-1,0,+1,0};
+        int dy[]= {0,1,0,-1};
+        for(int k=0;k<4;k++){
+           
+           ans =  (ans+   dfs( m,  n, maxMove-1,i+dx[k],j+dy[k])) % mod;
+       }
+        return dp[i][j][maxMove] = ans;
+        
+    }
+    int findPaths(int m, int n, int maxMove, int startRow, int startColumn) {
+        
+        memset(dp, -1,sizeof dp);
+        
+         return dfs(m,n,maxMove,startRow,startColumn);
+      
+        
+    }
+};
