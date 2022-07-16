@@ -1,0 +1,43 @@
+class Solution {
+private:
+    unordered_map<int, vector<int>>adj;
+    unordered_map<int,int> in, out;
+    
+    //prints the eulerian path
+private:
+    void dfs(int node,vector<vector<int>>&ans){
+        while(adj[node].size() != 0){
+            
+            int next = adj[node].back();
+            adj[node].pop_back();
+            dfs(next,ans);
+            ans.push_back({node, next});
+        }
+    }
+    
+public:
+    vector<vector<int>> validArrangement(vector<vector<int>>& pairs) {
+    for(auto &it :pairs){
+        adj[it[0]].push_back(it[1]);
+        in[it[1]]++;
+        out[it[0]]++;
+    }
+        int start =-1;
+        for(auto &it:adj){
+            if(out[it.first] - in[it.first] == 1){
+                start = it.first;
+                break;
+            }
+        }
+        if(start == -1){
+            start =pairs[0][0];
+        }
+        vector<vector<int>> ans;
+        dfs(start, ans);
+        reverse(ans.begin(), ans.end());
+        
+        return ans;
+        
+        
+    }
+};
