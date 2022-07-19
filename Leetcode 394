@@ -1,0 +1,39 @@
+class Solution {
+public:
+    string decodeString(string s) {
+        stack<string>chars;
+        stack<int>nums;
+       string ans;
+        int num=0;
+        
+        for(char &ch :s){
+            if(isdigit(ch)){
+                num =num*10 + (ch-'0');
+            }
+            else if(isalpha(ch)){
+                ans.push_back(ch);
+            }
+            else if (ch == '['){
+                chars.push(ans);
+                nums.push(num);
+                ans= "";
+                num=0;
+                
+            }
+            else if (ch == ']'){
+                string temp =ans;
+                for(int i=0;i<nums.top()-1;i++){
+                    ans +=temp;
+                }
+                ans = chars.top()+ans;
+                chars.pop();
+                nums.pop();
+            }
+          
+            
+        }
+        
+        return ans;
+        
+    }
+};
