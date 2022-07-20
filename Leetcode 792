@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int numMatchingSubseq(string s, vector<string>& words) {
+        int ans=0;
+        int len1=s.size();
+        unordered_map<string, int>mpp;
+        for(auto &word: words){
+            int len2=word.size();
+            int j=0;
+            if(mpp.find(word) == mpp.end()){
+                for(int i=0;i<len1 && j< len2;i++){
+                    if(s[i] == word[j]){
+                        j++;
+                    }
+                    
+                }
+                ans +=(j==len2);
+                mpp[word] = (j==len2);
+            }
+            else {
+                ans +=mpp[word];
+            }
+        }
+        return ans;
+    }
+};
