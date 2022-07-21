@@ -1,0 +1,38 @@
+class Solution {
+public:
+    vector<int> findBall(vector<vector<int>>& grid) {
+        
+        vector<int>result(grid[0].size());
+        if( grid.size() == 0) return result;
+        int n=grid[0].size();
+        
+        int m=grid.size();
+        
+        for(int i=0;i<n;i++){
+            int currR=0;
+            int currC=i;
+            while(currR<m){
+                if(grid[currR][currC] == 1 && currC+1 <n && grid[currR][currC+1] == 1){
+                    currR++;
+                    currC++;
+                }
+                else if(grid[currR][currC] == -1 && currC-1 >=0 && grid[currR][currC-1]==-1){
+                    currR++;
+                    currC--;
+                }
+                else {
+                    break;
+                }
+            }
+           //result[i] = currR == m ? currC : -1;
+            if( currR == m){
+                result[i]=currC;
+            }
+            else {
+                result[i]=-1;
+            }
+            
+        }
+        return result;
+    }
+};
