@@ -1,0 +1,22 @@
+class Solution {
+private:
+    void swapRoot(TreeNode *curr){
+        if(!curr){
+            return ;
+        }
+        swapRoot(curr->left);
+        swapRoot(curr->right);
+        
+        TreeNode *temp;
+        
+        temp=curr->left;
+        curr->left=curr->right;
+        curr->right=temp;
+    }
+public:
+    TreeNode* invertTree(TreeNode* root) {
+        
+        swapRoot(root);
+        return root;
+    }
+};
