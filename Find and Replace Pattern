@@ -1,0 +1,26 @@
+class Solution {
+private:
+    string F(string w){
+        unordered_map<char, int>mpp;
+        for(char ch: w){
+            if(!mpp.count(ch)){
+                mpp[ch] = mpp.size();
+            }
+        }
+        for(int i=0;i<w.size();i++){
+            w[i] = 'a'+ mpp[w[i]];
+        }
+        return w;
+    }
+public:
+    vector<string> findAndReplacePattern(vector<string>& words, string pattern) {
+        vector<string>ans;
+        for(auto &it: words){
+            if(F(it) == F(pattern)){
+                ans.push_back(it);
+            }
+        }
+        return ans;
+        
+    }
+};
