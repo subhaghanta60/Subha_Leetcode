@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int numFactoredBinaryTrees(vector<int>& arr) {
+        map<int, long long >mpp;
+        sort(arr.begin(), arr.end());
+        for(auto &it : arr){
+            mpp.insert({it, 1});
+        }
+        for(int i=0;i<arr.size();i++){
+            
+           long long count =0;
+            for(int j=0;j<i;j++){
+                if(arr[i]%arr[j] ==0){
+                    auto it1 =mpp.find(arr[i]/arr[j]);
+                    auto it2 =mpp.find(arr[j]);
+                    if(it1 !=mpp.end()){
+                        count +=(it1->second)*(it2->second);
+                    }
+                }
+            }
+            mpp[arr[i]] += count;
+        }
+        long long  sum =0;
+        for(auto &it: mpp){
+            sum += it.second;
+        }
+        return sum %(1000000007);
+    }
+};
