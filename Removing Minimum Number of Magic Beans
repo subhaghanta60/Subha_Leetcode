@@ -1,0 +1,17 @@
+class Solution {
+public:
+    long long minimumRemoval(vector<int>& beans) {
+        long long n =beans.size();
+        sort(beans.begin(),beans.end());
+        long long totSum =0;
+        long long ans =1e18;
+        for(long long i=0;i<n;i++){
+            totSum += beans[i];
+            }
+        for(long long i=0;i<n;i++){
+           
+            ans = min(ans,totSum - (n-i)*beans[i]*1LL);
+        }
+        return ans;
+    }
+};
