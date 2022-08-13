@@ -1,0 +1,33 @@
+class Solution {
+public:
+    vector<int> findSubstring(string s, vector<string>& words) {
+        int len = words[0].size();
+        int noofWords = words.size();
+        vector<int>ans;
+        unordered_map<string, int>wordMap;
+        
+        if(len * noofWords  > s.size()){
+            return ans;
+        }
+        for(string &word :words){
+            wordMap[word]++;
+        }
+        for(int i=0;i<= s.size()-(noofWords * len); i++){
+            unordered_map<string, int>wordsUseMap;
+            for(int j=i;j<i+ (noofWords*len);j+=len){
+                string curr = s.substr(j,len);
+                if(wordMap.find(curr) == wordMap.end())
+                    break;
+                
+                wordsUseMap[curr]++;
+                if(wordsUseMap[curr] > wordMap[curr])
+                    break;
+                
+            }
+            if(wordsUseMap == wordMap){
+                ans.push_back(i);
+            }
+        }
+        return ans;
+    }
+};
