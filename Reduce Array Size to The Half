@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int minSetSize(vector<int>& arr) {
+        unordered_map<int,int>mpp;
+        for(auto &it : arr){
+            mpp[it]++;
+        }
+        multiset<int, greater<int>>St;
+        for(auto &it:mpp){
+             St.insert(it.second);
+        }
+        int size = arr.size();
+        int count =0;
+        int ans =0;
+        for(auto it = St.begin();count*2 <size;it++){
+            ans++;
+            count +=*it;
+            
+        }
+        return ans;
+    }
+};
