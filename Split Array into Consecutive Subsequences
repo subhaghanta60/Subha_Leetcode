@@ -1,0 +1,31 @@
+class Solution {
+public:
+    bool isPossible(vector<int>& nums) {
+        unordered_map<int,int>mpp,dupmpp;
+        
+        for(auto &it : nums){
+            mpp[it]++;
+        }
+        for(auto &it : nums){
+            if(mpp[it] == 0){
+                continue;
+            }
+            if(dupmpp[it] > 0){
+                dupmpp[it]--;
+                dupmpp[it+1]++;
+                mpp[it]--;
+            }
+            else if(mpp[it] >0 && mpp[it+1] >0 && mpp[it+2] >0){
+                dupmpp[it+3]++;
+                mpp[it]--;
+                mpp[it+1]--;
+                mpp[it+2]--;
+                
+            }
+            else {
+                return false;
+            }
+        }
+        return true;
+    }
+};
