@@ -1,0 +1,30 @@
+class Solution {
+private:
+    bool func(unordered_map<int,int>&mpp, long long k, int s, int digits){
+        if(k >pow(10,digits)-1) return false;
+        if(k ==s) return true;
+        unordered_map<int,int> copy =mpp;
+        string temp = to_string(k);
+        for(int i=0;i<temp.size();i++){
+            copy[temp[i]-48]--;
+            
+        }
+        for(auto &it: copy){
+            if(it.second !=0) {
+                return func(mpp,k*2,s,digits);
+            }
+        }
+        return true;
+    }
+public:
+    bool reorderedPowerOf2(int n) {
+        if(n==1) return true;
+        unordered_map<int,int>mpp;
+        string temp = to_string(n);
+        for(int i=0;i<temp.size();i++){
+            mpp[temp[i]-48]++;
+        }
+        int digits = temp.size();
+        return func(mpp,2,n,digits);
+    }
+};
