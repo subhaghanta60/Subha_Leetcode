@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int longestNiceSubarray(vector<int>& nums) {
+        int sum=0;
+        int ans=0;
+        int first=0;
+        
+        for(int i=0;i<nums.size();i++){
+            while((sum & nums[i]) >0){
+                sum  ^=nums[first++];
+            }
+            sum |=nums[i];
+            ans =max(ans,i-first+1);
+        }
+        return ans;
+        
+    }
+};
