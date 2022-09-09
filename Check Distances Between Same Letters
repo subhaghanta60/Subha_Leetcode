@@ -1,0 +1,45 @@
+class Solution {
+public:
+    bool checkDistances(string s, vector<int>& distance) {
+        unordered_map<int,int>mpp;
+        for(int i=0;i<s.size();i++){
+            if(mpp.find(s[i]-'a') != mpp.end()){
+                int x =i- mpp[s[i]-'a'] ;
+                cout<<x<<" ";
+                if(x != distance[s[i]-'a']){
+                    return false;
+                }
+            }
+            else {
+                mpp[s[i]-'a'] =i+1;
+            }
+        }
+        return true;
+    }
+};
+
+*********************************
+
+class Solution {
+public:
+    bool checkDistances(string s, vector<int>& distance) {
+        set<char>st;
+        for(int i=0;i<s.size();i++){
+            if(st.find(s[i]) != st.end()){
+                continue;
+            }
+            else {
+                st.insert(s[i]);
+                int x =i+distance[s[i]-'a']+1;
+                if(x <s.size() && s[i] == s[x]){
+                    continue;
+                }
+                else {
+                    return false;
+                }
+            }
+        }
+        return true;
+        
+    }
+};
