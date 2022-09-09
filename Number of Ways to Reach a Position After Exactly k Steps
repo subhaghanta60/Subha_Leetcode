@@ -1,0 +1,23 @@
+class Solution {
+    int mod =1000000000+7;
+    private:
+    int func(int start, int end, int k,vector<vector<int>>&dp){
+        if(k==0 && start==end) return 1;
+        
+        if(k==0){
+            return 0;
+        }
+        if(dp[start][k] !=-1) return dp[start][k];
+        int forward = func(start+1,end,k-1,dp);
+        int backward = func(start-1,end,k-1,dp);
+        
+        return dp[start][k] = (forward+backward)%mod;
+        
+    }
+public:
+    int numberOfWays(int startPos, int endPos, int k) {
+        vector<vector<int>>dp(10000,vector<int>(k+1,-1));
+        return func(startPos+1000, endPos+1000, k,dp)%mod;
+        
+    }
+};
