@@ -1,0 +1,49 @@
+class Solution {
+private:
+    void func(vector<vector<int>>& matrix, int numSelect,int currc,int ind,vector<bool>&visited,int &ans){
+        
+        
+        if(ind == matrix[0].size()){
+            int cnt=0;
+            for(int i=0;i<matrix.size();i++){
+                bool flag=true;
+                for(int j=0;j<matrix[0].size();j++){
+                    if(matrix[i][j] == 1){
+                        if(!visited[j]){
+                            flag=false;
+                            break;
+                        }
+                    }
+                }
+                if(flag){
+                    cnt++;
+                }
+                
+            }
+            ans=max(ans,cnt);
+            return;
+        }
+        
+        
+        
+        if(currc <numSelect){
+            visited[ind]=true;
+            func(matrix,numSelect,currc+1,ind+1,visited,ans);
+            visited[ind]=false;
+                
+        }
+        func(matrix,numSelect,currc,ind+1,visited,ans);
+        
+    }
+    
+public:
+    int maximumRows(vector<vector<int>>& matrix, int numSelect) {
+        int currc=0;
+        vector<bool>visited(matrix[0].size(),false);
+        int ans=0;
+        
+        func(matrix,numSelect,currc,0,visited,ans);
+        return ans;
+        
+    }
+};
