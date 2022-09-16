@@ -1,0 +1,22 @@
+ private:
+    void func(int ind,int sum,vector<int>&ans,vector<int>arr,int N){
+        if(ind==N){
+            ans.push_back(sum);
+            return;
+        }
+        
+        sum+=arr[ind];
+        func(ind+1,sum,ans,arr,N);
+        sum-=arr[ind];
+        func(ind+1,sum,ans,arr,N);
+        
+        
+    }
+public:
+    vector<int> subsetSums(vector<int> arr, int N)
+    {
+        vector<int>ans;
+        func(0,0,ans,arr,N);
+        sort(ans.begin(),ans.end());
+        return ans;
+    }
