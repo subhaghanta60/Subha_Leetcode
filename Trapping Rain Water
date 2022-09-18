@@ -1,0 +1,62 @@
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n=height.size();
+        vector<int>prefix(n);
+        vector<int>suffix(n);
+        
+        int maxpre=INT_MIN;
+        for(int i=0;i<n;i++){
+             maxpre = max(maxpre,height[i]);
+            prefix[i] = maxpre;
+        }
+        int maxsuf=INT_MIN;
+        for(int i=n-1;i>=0;i--){
+            maxsuf = max(maxsuf,height[i]);
+            suffix[i] = maxsuf;
+        }
+        
+        int ans=0;
+        for(int i=0;i<n;i++){
+            ans += min(suffix[i],prefix[i]) - height[i];
+        }
+        return ans;
+    }
+};
+
+********************************************
+
+
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int l=0;
+        int r=height.size()-1;
+        int leftmax =0;
+        int rightmax=0;
+        int ans=0;
+        while(l<r){
+            if(height[l] <=height[r]){
+                if(height[l] > leftmax){
+                    leftmax = height[l];
+                }
+                else {
+                    ans +=leftmax-height[l];
+                }
+                l++;
+                
+            }
+            else {
+                if(height[r] > rightmax){
+                    rightmax =height[r];
+                }
+                else {
+                    ans +=rightmax-height[r];
+                }
+                r--;
+                
+            }
+        }
+        return ans;
+    }
+};
