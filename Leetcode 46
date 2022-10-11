@@ -1,0 +1,71 @@
+class Solution {
+private:
+    void RecurPermute(vector<int>&ds, vector<int>&nums, vector<vector<int>>&ans, int freq[]){
+        if(ds.size() == nums.size()){
+            ans.push_back(ds);
+            return;
+        }
+        for(int i=0;i<nums.size();i++){
+            if(!freq[i]){
+                ds.push_back(nums[i]);
+                freq[i] = 1;
+                RecurPermute(ds,nums,ans,freq);
+                freq[i] =0;
+                ds.pop_back();
+            }
+        }
+        
+        
+        
+    }
+public:
+    vector<vector<int>> permute(vector<int>& nums) {
+        int n =nums.size();
+        vector<vector<int>>ans;
+        vector<int>ds;
+        int freq[6] = {0};
+        for(int i=0;i<n;i++){
+            freq[i] =0;
+        }
+        RecurPermute(ds,nums,ans, freq);
+        return ans;
+    }
+};
+
+
+****************************************OPTIMAL SOLUATION*********************************
+
+class Solution {
+private:
+    void swap(int i,int j, vector<int>&nums){
+        int t=nums[i];
+        nums[i]=nums[j];
+        nums[j]=t;
+    }
+private:
+    void recurpermute(int index, vector<int>&nums,vector<vector<int>>&ans){
+        if(index == nums.size()){
+            vector<int>ds;
+            for(int i=0;i<nums.size();i++){
+                ds.push_back(nums[i]);
+            }
+            ans.push_back(ds);
+            return;
+        }
+        for(int i=index;i<nums.size();i++){
+            swap(i,index,nums);
+            recurpermute(index+1,nums,ans);
+            swap(i,index,nums);
+            
+        }
+    }
+public:
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>>ans;
+        recurpermute(0,nums,ans);
+        return ans;
+    }
+};
+
+Tc -> n! * n;
+Sc ->O(n)
