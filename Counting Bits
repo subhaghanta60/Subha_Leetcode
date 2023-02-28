@@ -1,0 +1,21 @@
+class Solution {
+private:
+    int numberOfBits(uint32_t n){
+        int nBits=0;
+        while(n){
+            n=n&(n-1);
+            nBits++;
+        }
+        
+        return nBits;
+    }
+public:
+    vector<int> countBits(int n) {
+        vector<int>ans(n+1,0);
+        for(int i=0;i<=n;i++){
+            ans[i] =numberOfBits(i);
+        }
+        
+        return ans;
+    }
+};
